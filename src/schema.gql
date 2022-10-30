@@ -1,0 +1,170 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type RecetaEntity {
+  id: String!
+  nombre: String!
+  descripcion: String!
+  foto: String!
+  preparacion: String!
+  video: String!
+  cultura: CulturaGastronomicaEntity!
+  productos: [ProductoEntity!]!
+}
+
+type ProductoEntity {
+  id: String!
+  nombre: String!
+  categoria: String!
+  descripcion: String!
+  historia: String!
+  recetas: RecetaEntity!
+}
+
+type CiudadEntity {
+  id: String!
+  nombre: String!
+  pais: [PaisEntity!]!
+  restaurantes: [RestauranteEntity!]!
+}
+
+type PaisEntity {
+  id: String!
+  nombre: String!
+  ciudades: [CiudadEntity!]!
+  culturas: [CulturaGastronomicaEntity!]!
+}
+
+type CulturaGastronomicaEntity {
+  id: String!
+  nombre: String!
+  descripcion: String!
+  productos: ProductoEntity!
+  recetas: RecetaEntity!
+  restaurantes: [RestauranteEntity!]!
+  paises: PaisEntity!
+}
+
+type EstrellaMichellinEntity {
+  id: String!
+  fechaConsecucion: String!
+  restaurante: RestauranteEntity!
+}
+
+type RestauranteEntity {
+  id: String!
+  nombre: String!
+  estrellasMichellin: [EstrellaMichellinEntity!]!
+  culturas: [CulturaGastronomicaEntity!]!
+  ciudad: CiudadEntity!
+}
+
+type Query {
+  productos: [ProductoEntity!]!
+  producto(id: String!): ProductoEntity!
+  culturas: [CulturaGastronomicaEntity!]!
+  cultura(id: String!): CulturaGastronomicaEntity!
+  recetas: [RecetaEntity!]!
+  receta(id: String!): RecetaEntity!
+  findProductosByCulturaGastronomicaId(id_cultura: String!): [ProductoEntity!]!
+  findProductoCulturaGastronomicaIdProductoId(id_cultura: String!, id_producto: String!): ProductoEntity!
+  ciudades: [CiudadEntity!]!
+  ciudad(id: String!): CiudadEntity!
+  museums: [EstrellaMichellinEntity!]!
+  museum(id: String!): EstrellaMichellinEntity!
+  restaurantes: [RestauranteEntity!]!
+  restaurante(id: String!): RestauranteEntity!
+  findRestaurantesByCulturaId(id_cultura: String!): [RestauranteEntity!]!
+  findRestauranteByCulturaIdRestauranteId(id_cultura: String!, id_restaurante: String!): RestauranteEntity!
+  findEstrellasByRestauranteId(id_restaurante: String!): [EstrellaMichellinEntity!]!
+  findEstrellaByRestauranteIdEstrellaId(id_restaurante: String!, id_estrella: String!): EstrellaMichellinEntity!
+  findCulturasByRestauranteId(id_restaurante: String!): [CulturaGastronomicaEntity!]!
+  findculturaByRestauranteIdculturaId(id_restaurante: String!, id_cultura: String!): CulturaGastronomicaEntity!
+  findRestaurantesByCiudadId(id_ciudad: String!): [RestauranteEntity!]!
+  findRestauranteByCiudadIdRestauranteId(id_ciudad: String!, id_restaurante: String!): RestauranteEntity!
+  paises: [PaisEntity!]!
+  pais(id: String!): PaisEntity!
+  findCulturasByPaisId(id_pais: String!): [CulturaGastronomicaEntity!]!
+  findCulturaByPaisIdCulturaId(id_pais: String!, id_cultura: String!): CulturaGastronomicaEntity!
+  findCiudadesByPaisId(id_pais: String!): [CiudadEntity!]!
+  findCiudadByPaisIdCiudadId(id_pais: String!, id_ciudad: String!): CiudadEntity!
+}
+
+type Mutation {
+  createProducto(producto: ProductoDto!): ProductoEntity!
+  updateProducto(id: String!, producto: ProductoDto!): ProductoEntity!
+  deleteProducto(id: String!): String!
+  createCultura(cultura: CulturaGastronomicaDto!): CulturaGastronomicaEntity!
+  updateCultura(id: String!, cultura: CulturaGastronomicaDto!): CulturaGastronomicaEntity!
+  deleteCultura(id: String!): String!
+  createReceta(receta: RecetaDto!): RecetaEntity!
+  updatereceta(id: String!, receta: RecetaDto!): RecetaEntity!
+  deleteReceta(id: String!): String!
+  addProductoToCulturaGastronomica(id_cultura: String!, id_producto: String!): CulturaGastronomicaEntity!
+  associateProductosCulturaGastronomica(productos: [ProductoDto!]!, id_cultura: String!): CulturaGastronomicaEntity!
+  deleteProductoCulturaGastronomica(id_cultura: String!, id_producto: String!): String!
+  createCiudad(pais: CiudadDto!): CiudadEntity!
+  updateCiudad(id: String!, ciudad: CiudadDto!): CiudadEntity!
+  deleteRestaurante(id: String!): String!
+  updateMuseum(id: String!, estrellaMichellin: EstrellaMichellinDto!): EstrellaMichellinEntity!
+  createRestaurante(restaurante: RestauranteDto!): RestauranteEntity!
+  updateRestaurante(id: String!, restaurante: RestauranteDto!): RestauranteEntity!
+  addRestauranteCultura(id_restaurante: String!, id_cultura: String!): CulturaGastronomicaEntity!
+  associateRestaurantesCultura(restaurantes: [RestauranteDto!]!, id_cultura: String!): CulturaGastronomicaEntity!
+  deleteRestauranteCultura(id_cultura: String!, id_restaurante: String!): String!
+  addEstrellaRestaurante(id_restaurante: String!, estrella: EstrellaMichellinDto!): RestauranteEntity!
+  associateEstrellasRestaurante(estrellas: [EstrellaMichellinDto!]!, id_restaurante: String!): RestauranteEntity!
+  deleteEstrellaRestaurante(id_restaurante: String!, id_estrella: String!): String!
+  addCulturaRestaurante(id_restaurante: String!, id_cultura: String!): RestauranteEntity!
+  associateCulturasRestaurante(culturas: [CulturaGastronomicaDto!]!, id_restaurante: String!): RestauranteEntity!
+  deleteCulturaRestaurante(id_restaurante: String!, id_cultura: String!): String!
+  addRestauranteCiudad(id_restaurante: String!, id_ciudad: String!): CiudadEntity!
+  associateRestaurantesCiudad(restaurantes: [RestauranteDto!]!, id_cultura: String!): CiudadEntity!
+  deleteRestauranteCiudad(id_ciudad: String!, id_restaurante: String!): String!
+  createPais(pais: PaisDto!): PaisEntity!
+  updatePais(id: String!, pais: PaisDto!): PaisEntity!
+  deletePais(id: String!): String!
+  addCulturaGastronomicaPais(id_pais: String!, id_cultura: String!): PaisEntity!
+  associateCulturasPais(culturas: [CulturaGastronomicaDto!]!, id_pais: String!): PaisEntity!
+  deleteCulturaPais(id_pais: String!, id_cultura: String!): String!
+  addCiudadToPais(id_pais: String!, id_ciudad: String!): PaisEntity!
+  associateCiudadesToPais(culturas: [CiudadDto!]!, id_pais: String!): PaisEntity!
+  removeCiudadFromPais(id_pais: String!, id_ciudad: String!): String!
+}
+
+input ProductoDto {
+  nombre: String!
+  descripcion: String!
+  categoria: String!
+  historia: String!
+}
+
+input CulturaGastronomicaDto {
+  nombre: String!
+  descripcion: String!
+}
+
+input RecetaDto {
+  nombre: String!
+  descripcion: String!
+  foto: String!
+  preparacion: String!
+  video: String!
+}
+
+input CiudadDto {
+  nombre: String!
+}
+
+input EstrellaMichellinDto {
+  fechaConsecucion: String!
+}
+
+input RestauranteDto {
+  nombre: String!
+}
+
+input PaisDto {
+  nombre: String!
+}
