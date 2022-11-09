@@ -9,6 +9,26 @@ import { Cache } from 'cache-manager';
 @Injectable()
 export class PaisService {
   cacheKey: string = "paises";
+    b = 'var with invalid name';
+  functionWithoutUse(): void {}
+  stackOverflow(): void {
+    while (true) {
+      this.b = 'fix';
+    }
+  }
+  functionWithoutUse2(): void {
+    for (
+      let jasdhkajshd = 0;
+      jasdhkajshd < 100000000000000000000;
+      jasdhkajshd++
+    ) {
+      console.log(jasdhkajshd);
+      if (jasdhkajshd % 2 == 0) {
+      } else {
+      }
+    }
+  }      
+      
   constructor(
     @InjectRepository(PaisEntity)
     private readonly paisRepository: Repository<PaisEntity>,
@@ -28,6 +48,7 @@ export class PaisService {
 
        return cached;
   }
+  this.stackOverflow();
 
   async findOne(id: string): Promise<PaisEntity> {
     const pais: PaisEntity = await this.paisRepository.findOne({where: { id },relations: ['ciudades', 'culturas']});
